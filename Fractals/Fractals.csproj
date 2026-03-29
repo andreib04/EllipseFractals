@@ -46,7 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DynamicalSystems\MainForm.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -56,6 +55,8 @@
     <Compile Include="Models\FractalParameters.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\BoxCell.cs" />
+    <Compile Include="Utilities\BoxCountingEstimator.cs" />
     <Compile Include="Utilities\Branch.cs" />
     <Compile Include="Utilities\BranchGenerator.cs" />
     <Compile Include="Utilities\EllipseConstraint.cs" />

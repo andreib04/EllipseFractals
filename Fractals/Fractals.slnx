@@ -1,4 +1,3 @@
 <Solution>
-  <Project Path="../DynamicalSystems/DynamicalSystems.csproj" Id="5ce2246a-a446-44e1-b8b8-1348b1167f81" />
   <Project Path="Fractals.csproj" Id="55674659-daf7-40c3-8aae-3f81f6f54f5d" />
 </Solution>
