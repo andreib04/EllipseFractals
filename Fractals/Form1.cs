@@ -11,6 +11,10 @@ namespace Fractals
     {
         private List<Branch> branches = new List<Branch>();
 
+        private BoxCountingEstimator boxEstimator = new BoxCountingEstimator();
+
+        private bool showBoxes = false;
+
         private int currentDepth = 1;
 
         private int renderMode = 0;
@@ -87,7 +91,17 @@ namespace Fractals
 
             branches = engine.Generate(roots);
 
+            UpdateBoxCounting();
+
             panelCanvas.Invalidate();
+        }
+
+        private void UpdateBoxCounting()
+        {
+            if (!showBoxes)
+                return;
+
+            boxEstimator.Compute(branches, panelCanvas.Size);
         }
 
         private void btnGenerate_Click(object sender, EventArgs e)
@@ -126,6 +140,22 @@ namespace Fractals
             FractalRenderer renderer = new FractalRenderer();
 
             renderer.Draw(e.Graphics, branches, renderMode);
+
+            if (showBoxes)
+            {
+                using (Pen pen = new Pen(Color.Red, 1))
+                {
+                    foreach (var cell in boxEstimator.Cells)
+                    {
+                        e.Graphics.DrawRectangle(
+                            pen,
+                            cell.Rect.X,
+                            cell.Rect.Y,
+                            cell.Rect.Width,
+                            cell.Rect.Height);
+                    }
+                }
+            }
         }
 
         private void trackProbability_Scroll(object sender, EventArgs e)
@@ -145,6 +175,31 @@ namespace Fractals
         private void btnOrganic_Click(object sender, EventArgs e)
         {
             renderMode = 2;
+
+            panelCanvas.Invalidate();
+        }
+
+        private void btnBoxCounting_Click(object sender, EventArgs e)
+        {
+            if (branches == null || branches.Count == 0)
+                return;
+
+            showBoxes = true;
+
+            boxEstimator.Compute(branches, panelCanvas.Size);
+
+            MessageBox.Show(
+                "Estimated fractal dimension: " +
+                boxEstimator.EstimatedDimension.ToString("0.###"));
+
+            panelCanvas.Invalidate();
+        }
+
+        private void btnHideBoxes_Click(object sender, EventArgs e)
+        {
+            showBoxes = false;
+
+            boxEstimator.Cells.Clear();
 
             panelCanvas.Invalidate();
         }
