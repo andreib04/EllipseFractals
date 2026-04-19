@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Langston_s_Ant;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Langston_s_Ant
+namespace LangstonsAnt
 {
     internal static class Program
     {

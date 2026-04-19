@@ -21,9 +21,16 @@ namespace Langston_s_Ant.Application
             Ants = new List<Ant>();
             var rand = new Random();
 
-            for(int i = 0; i< antCount; i++)
+            int centerX = grid.Width / 2;
+            int centerY = grid.Height / 2;
+
+            for (int i = 0; i < antCount; i++)
             {
-                Ants.Add(new Ant(rand.Next(grid.Width), rand.Next(grid.Height)));
+                //prima furnica porneste din centru
+                //restul la cateva celule in jurul centrului
+                int x = centerX + (i == 0 ? 0 : rand.Next(-5, 6));
+                int y = centerY + (i == 0 ? 0 : rand.Next(-5, 6));
+                Ants.Add(new Ant(x, y));
             }
         }
 
